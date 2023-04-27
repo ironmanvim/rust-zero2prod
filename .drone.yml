@@ -11,23 +11,31 @@ steps:
     image: rust
     commands:
       - cargo test
+    depends_on:
+      - clone
 
   - name: Rustfmt
     image: rust
     commands:
       - rustup component add rustfmt
       - cargo fmt --check
+    depends_on:
+      - clone
 
   - name: Clippy
     image: rust
     commands:
       - rustup component add clippy
       - cargo clippy -- -D warnings
+    depends_on:
+      - clone
 
   - name: Code coverage
     image: xd009642/tarpaulin
     commands:
       - cargo tarpaulin --verbose --workspace
+    depends_on:
+      - clone
 
 trigger:
   event:
