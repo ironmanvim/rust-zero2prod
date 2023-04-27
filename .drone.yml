@@ -31,9 +31,10 @@ steps:
       - clone
 
   - name: Code coverage
-    image: xd009642/tarpaulin
+    image: rust
     commands:
-      - cargo tarpaulin --verbose --workspace
+      - cargo install cargo-tarpaulin
+      - cargo tarpaulin --verbose --workspace --ignore-tests
     depends_on:
       - clone
 
