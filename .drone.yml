@@ -36,9 +36,8 @@ steps:
       - name: cache
         path: /tmp/cache
     commands:
-      - export CARGO_TARGET_DIR='/tmp/cache'
-      - cargo install cargo-tarpaulin
-      - cargo tarpaulin --verbose --workspace --ignore-tests
+      - CARGO_TARGET_DIR='/tmp/cache' cargo install cargo-tarpaulin
+      - CARGO_TARGET_DIR='/tmp/cache' cargo tarpaulin --verbose --workspace --ignore-tests
     depends_on:
       - clone
 
