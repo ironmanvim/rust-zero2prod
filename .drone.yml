@@ -32,11 +32,19 @@ steps:
 
   - name: Code coverage
     image: rust
+    volumes:
+      - name: cache
+        path: /tmp/cache
     commands:
-      - cargo install cargo-tarpaulin
-      - cargo tarpaulin --verbose --workspace --ignore-tests
+      - CARGO_TARGET_DIR='/tmp/cache' cargo install cargo-tarpaulin
+      - CARGO_TARGET_DIR='/tmp/cache' cargo tarpaulin --verbose --workspace --ignore-tests
     depends_on:
       - clone
+
+volumes:
+  - name: cache
+    host:
+      path: /var/lib/cache/cargo
 
 trigger:
   event:
